@@ -29,7 +29,9 @@
 
 using namespace std ;
 
-#include "hzCtmpls.h"
+#include "hzTmplSet.h"
+#include "hzTmplMapS.h"
+#include "hzTmplMapM.h"
 #include "hzString.h"
 #include "hzMailer.h"
 #include "hzDissemino.h"
@@ -181,8 +183,8 @@ public:
 
 	mqItem	(void)
 	{
-		m_RelayTasks.SetDefaultObj((epRelay*)0) ;
-		m_Recipients.SetDefault((mqRcpt*)0) ;
+		//m_RelayTasks.SetDefaultObj((epRelay*)0) ;
+		//m_Recipients.SetDefault((mqRcpt*)0) ;
 	}
 
 	~mqItem	(void)

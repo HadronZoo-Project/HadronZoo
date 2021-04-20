@@ -38,7 +38,7 @@
 #ifndef hzTokens_h
 #define hzTokens_h
 
-#include "hzCtmpls.h"
+#include "hzTmplVect.h"
 
 #define MAXTOKENSIZE	256
 

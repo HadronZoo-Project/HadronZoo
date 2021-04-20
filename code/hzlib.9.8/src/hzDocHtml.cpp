@@ -3053,7 +3053,7 @@ hzEcode	hzDocHtml::_selectTerm	(hzSet<hzHtmElem*>& elements, const hzString& ter
 	_hzfunc("hzDocHtml::_selectTerm") ;
 
 	hzSet<hzHtmElem*>	parents ;	//	Parents
-	hzVect<hzString>	ar ;		//	Array of terms
+	hzArray<hzString>	ar ;		//	Array of terms
 
 	uint32_t	x ;		//	For populating reducedSet
 	uint32_t	t ;		//	Term count

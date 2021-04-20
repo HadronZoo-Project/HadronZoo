@@ -21,6 +21,7 @@
 //	Other Includes
 #include "hzBasedefs.h"
 #include "hzString.h"
+#include "hzChain.h"
 
 class	hzDomain
 {
@@ -37,14 +38,14 @@ public:
 	void		Clear		(void) ;
 	hzDomain&	operator=	(const char* cpStr) ;
 	hzDomain&	operator=	(const hzString& S) ;
-	hzDomain&	operator=	(hzChain::Iter& ci) ;
+	hzDomain&	operator=	(const chIter& ci) ;
 	hzDomain&	operator=	(const hzDomain& E) ;
 
 	//	Constructors
 	hzDomain	(void)					{ m_addr = 0 ; }
 	hzDomain	(const hzDomain& dom)	{ m_addr = 0 ; operator=(dom) ; }
 	hzDomain	(const char* cpEMAddr)	{ m_addr = 0 ; operator=(cpEMAddr) ; }
-	hzDomain	(hzString& dom)			{ m_addr = 0 ; operator=(dom) ; }
+	hzDomain	(const hzString& dom)	{ m_addr = 0 ; operator=(dom) ; }
 
 	//	Destructor
 	~hzDomain	(void)	{ Clear() ; }
@@ -105,7 +106,7 @@ public:
 	void		Clear		(void) ;
 	hzEmaddr&	operator=	(const char* cpStr) ;
 	hzEmaddr&	operator=	(const hzString& S) ;
-	hzEmaddr&	operator=	(hzChain::Iter& ci) ;
+	hzEmaddr&	operator=	(const chIter& ci) ;
 	hzEmaddr&	operator=	(const hzEmaddr& E) ;
 
 	//	Constructors

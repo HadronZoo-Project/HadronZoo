@@ -879,7 +879,7 @@ hzEcode	hzHttpClient::GetPage	(HttpRC& hRet, const hzUrl& url, hzMapS<hzString,h
 	return rc ;
 }
 
-hzEcode	hzHttpClient::_postform	(HttpRC& hRet, const hzUrl& url, hzMapS<hzString,hzCookie>& cookies, const hzVect<hzString>& hdrs, const hzChain&	formData)
+hzEcode	hzHttpClient::_postform	(HttpRC& hRet, const hzUrl& url, hzMapS<hzString,hzCookie>& cookies, hzVect<hzString>& hdrs, const hzChain& formData)
 {
 	//	Support function for hzHttpClient::PostForm(). Compiles the HTTP request and adds the supplied form. The functionality herin would just
 	//	appear in PostForm() except for the need to cope with redirection. This requires that the request ...
@@ -949,7 +949,8 @@ hzEcode	hzHttpClient::_postform	(HttpRC& hRet, const hzUrl& url, hzMapS<hzString
 	if (hdrs.Count())
 	{
 		for (nIndex = 0 ; nIndex < hdrs.Count() ; nIndex++)
-			m_Request << hdrs.Element(nIndex) ;
+			//m_Request << hdrs.Element(nIndex) ;
+			m_Request << hdrs[nIndex] ;
 	}
 
 	m_Request << "Connection: keep-alive\r\n" ;
@@ -986,7 +987,7 @@ hzEcode	hzHttpClient::_postform	(HttpRC& hRet, const hzUrl& url, hzMapS<hzString
 	return rc ;
 }
 
-hzEcode	hzHttpClient::PostForm	(HttpRC& hRet, const hzUrl& url, hzMapS<hzString,hzCookie>& cookies, const hzVect<hzString>& hdrs, const hzList<hzPair>& formData)
+hzEcode	hzHttpClient::PostForm	(HttpRC& hRet, const hzUrl& url, hzMapS<hzString,hzCookie>& cookies, hzVect<hzString>& hdrs, const hzList<hzPair>& formData)
 {
 	//	Post a form to the server. Note that this will normally result in a HTTP response. This response must be processed in the same
 	//	way (ie values are extracted from lines in the HTTP header).
@@ -1076,7 +1077,7 @@ hzEcode	hzHttpClient::PostForm	(HttpRC& hRet, const hzUrl& url, hzMapS<hzString,
 	return rc ;
 }
 
-hzEcode	hzHttpClient::PostAjax	(HttpRC& hRet, const hzUrl& url, hzMapS<hzString,hzCookie>& cookies, const hzVect<hzString>& hdrs, const hzList<hzPair>& formData)
+hzEcode	hzHttpClient::PostAjax	(HttpRC& hRet, const hzUrl& url, hzMapS<hzString,hzCookie>& cookies, hzVect<hzString>& hdrs, const hzList<hzPair>& formData)
 {
 	//	Post a form to the server but do not seek a HTTP response.
 	//
@@ -1158,7 +1159,8 @@ hzEcode	hzHttpClient::PostAjax	(HttpRC& hRet, const hzUrl& url, hzMapS<hzString,
 	if (hdrs.Count())
 	{
 		for (nIndex = 0 ; nIndex < hdrs.Count() ; nIndex++)
-			m_Request << hdrs.Element(nIndex) ;
+			//m_Request << hdrs.Element(nIndex) ;
+			m_Request << hdrs[nIndex] ;
 	}
 
 	m_Request << "Connection: close\r\n\r\n" ;

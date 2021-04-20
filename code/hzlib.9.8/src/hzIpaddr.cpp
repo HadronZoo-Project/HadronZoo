@@ -33,7 +33,6 @@ using namespace std ;
 #include <errno.h>
 
 #include "hzChars.h"
-#include "hzCtmpls.h"
 #include "hzTextproc.h"
 #include "hzDirectory.h"
 #include "hzIpaddr.h"

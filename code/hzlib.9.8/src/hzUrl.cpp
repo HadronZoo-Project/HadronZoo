@@ -159,13 +159,6 @@ bool	hzUrl::IsSSL	(void) const
 	//	Returns:	True	If the port is set to 443
 	//				False	Otherwise
 
-	_url_space*	thisCtl ;	//	This URL space
-
-	if (!m_addr)
-		return false ;
-
-	thisCtl = (_url_space*) _strXlate(m_addr) ;
-
 	if (Port() == 443)
 		return true ;
 	return false ;
@@ -603,11 +596,11 @@ bool	hzUrl::operator<	(const hzUrl& testUrl) const
 	if (!m_addr && testUrl.m_addr)	return true ;
 	if (m_addr && !testUrl.m_addr)	return false ;
 
-	_url_space*	thisCtl ;		//	This URL space
-	_url_space*	suppCtl ;		//	Supplied URL space
+	//_url_space*	thisCtl ;		//	This URL space
+	//_url_space*	suppCtl ;		//	Supplied URL space
 
-	thisCtl = (_url_space*) _strXlate(m_addr) ;
-	suppCtl = (_url_space*) _strXlate(testUrl.m_addr) ;
+	//thisCtl = (_url_space*) _strXlate(m_addr) ;
+	//suppCtl = (_url_space*) _strXlate(testUrl.m_addr) ;
 
 	return Whole() < testUrl.Whole() ? true : false ;
 }
@@ -625,11 +618,11 @@ bool	hzUrl::operator<=	(const hzUrl& testUrl) const
 	if (!m_addr && testUrl.m_addr)	return true ;
 	if (m_addr && !testUrl.m_addr)	return false ;
 
-	_url_space*	thisCtl ;		//	This URL space
-	_url_space*	suppCtl ;		//	Supplied URL space
+	//_url_space*	thisCtl ;		//	This URL space
+	//_url_space*	suppCtl ;		//	Supplied URL space
 
-	thisCtl = (_url_space*) _strXlate(m_addr) ;
-	suppCtl = (_url_space*) _strXlate(testUrl.m_addr) ;
+	//thisCtl = (_url_space*) _strXlate(m_addr) ;
+	//suppCtl = (_url_space*) _strXlate(testUrl.m_addr) ;
 
 	return Whole() <= testUrl.Whole() ? true : false ;
 }
@@ -647,11 +640,11 @@ bool	hzUrl::operator>	(const hzUrl& testUrl) const
 	if (!m_addr && testUrl.m_addr)	return false ;
 	if (m_addr && !testUrl.m_addr)	return true ;
 
-	_url_space*	thisCtl ;		//	This URL space
-	_url_space*	suppCtl ;		//	Supplied URL space
+	//_url_space*	thisCtl ;		//	This URL space
+	//_url_space*	suppCtl ;		//	Supplied URL space
 
-	thisCtl = (_url_space*) _strXlate(m_addr) ;
-	suppCtl = (_url_space*) _strXlate(testUrl.m_addr) ;
+	//thisCtl = (_url_space*) _strXlate(m_addr) ;
+	//suppCtl = (_url_space*) _strXlate(testUrl.m_addr) ;
 
 	return Whole() > testUrl.Whole() ? true : false ;
 }
@@ -669,11 +662,11 @@ bool	hzUrl::operator>=	(const hzUrl& testUrl) const
 	if (!m_addr && testUrl.m_addr)	return false ;
 	if (m_addr && !testUrl.m_addr)	return true ;
 
-	_url_space*	thisCtl ;		//	This URL space
-	_url_space*	suppCtl ;		//	Supplied URL space
+	//_url_space*	thisCtl ;		//	This URL space
+	//_url_space*	suppCtl ;		//	Supplied URL space
 
-	thisCtl = (_url_space*) _strXlate(m_addr) ;
-	suppCtl = (_url_space*) _strXlate(testUrl.m_addr) ;
+	//thisCtl = (_url_space*) _strXlate(m_addr) ;
+	//suppCtl = (_url_space*) _strXlate(testUrl.m_addr) ;
 
 	return Whole() >= testUrl.Whole() ? true : false ;
 }

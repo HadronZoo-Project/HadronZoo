@@ -171,8 +171,6 @@ void		SetStatusIP		(hzIpaddr ipa, hzIpStatus status, uint32_t nDelay) ;
 hzIpStatus	GetStatusIP		(hzIpaddr ipa) ;
 
 //	Globals
-extern	hzMapS	<hzIpaddr,hzIpinfo>	_hzGlobal_StatusIP ;	//	Black and white listed IP addresses
-
 extern	const hzIpaddr	_hzGlobal_nullIP ;		//	Null IP address
 
 #endif	//	hzIpaddr_h

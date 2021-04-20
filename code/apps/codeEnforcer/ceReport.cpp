@@ -27,7 +27,6 @@
 
 #include "hzChars.h"
 #include "hzTextproc.h"
-#include "hzCtmpls.h"
 
 #include "enforcer.h"
 

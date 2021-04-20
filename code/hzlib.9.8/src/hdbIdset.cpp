@@ -960,6 +960,7 @@ uint32_t	hdbIdset::Fetch	(hzVect<uint32_t>& Result, uint32_t nStart, uint32_t nR
 	uint32_t	segAddr ;		//	Segment address
 	uint32_t	nSegStart ;		//	Starting position within a segment
 	uint32_t	x ;				//	For iterating resut of segment fetch
+	uint32_t	v ;				//	For value
 
 	Result.Clear() ;
 
@@ -991,7 +992,10 @@ uint32_t	hdbIdset::Fetch	(hzVect<uint32_t>& Result, uint32_t nStart, uint32_t nR
 			pSeg->_fetch(temp, segNo, nSegStart, nReq - Result.Count()) ;
 
 			for (x = 0 ; x < temp.Count() ; x++)
-				Result.Add(temp[x]) ;
+			{
+				v = temp[x] ;
+				Result.Add(v) ;
+			}
 		}
 
 		nPosn = nMax ;

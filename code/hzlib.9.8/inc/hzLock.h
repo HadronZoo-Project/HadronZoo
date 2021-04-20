@@ -198,6 +198,17 @@ public:
 	virtual	void	Unlock		(void) = 0 ;
 } ;
 
+enum	hzLockOpt
+{
+	//	Category:	System
+	//
+	//	Note this is for simplification of arguments within collection class templates only
+
+	HZ_NOLOCK,		//	No locking in use
+	HZ_ATOMIC,		//	Atomic locks no contention reporting
+	HZ_MUTEX		//	Atomic locks with contention reporting
+} ;
+
 class	hzLockRW	: public hzLocker
 {
 	//	Category:	Synchronization

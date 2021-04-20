@@ -36,12 +36,10 @@
 #include "hzChain.h"
 #include "hzDate.h"
 #include "hzTextproc.h"
-#include "hzCtmpls.h"
 #include "hzCodec.h"
 #include "hzDocument.h"
 #include "hzDirectory.h"
 #include "hzDatabase.h"
-//#include "hzFsTbl.h"
 #include "hzDelta.h"
 #include "hzProcess.h"
 

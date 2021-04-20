@@ -23,7 +23,8 @@
 
 #include "hzChars.h"
 #include "hzErrcode.h"
-#include "hzCtmpls.h"
+#include "hzTmplSet.h"
+#include "hzTmplMapM.h"
 #include "hzProcess.h"
 #include "hzCron.h"
 

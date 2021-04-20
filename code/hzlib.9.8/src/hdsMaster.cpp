@@ -153,7 +153,7 @@ void	hdsApp::SetupMasterMenu	(void)
 	hdsTree*		pAG ;			//	Tree pointer
 	hdsArticle*		pRoot ;			//	Tree item
 	hdsArticle*		pHead ;			//	Tree heading
-	hdsArticle*		pItem_F ;		//	Tree item "Field Specs"
+	//hdsArticle*		pItem_F ;		//	Tree item "Field Specs"
 	hdsArticle*		pItem_E ;		//	Tree item "Enums"
 	hdsArticle*		pItem_C ;		//	Tree item "Classes"
 	hdsArticle*		pItem_R ;		//	Tree item "Repositories"
@@ -211,13 +211,16 @@ void	hdsApp::SetupMasterMenu	(void)
 	title = "Data Object Model" ;
 	pHead = m_DataModel.AddHead(pRoot, refname, title, true) ;
 
-	if (m_Fldspecs.Count())			{ refname = "fldspec" ;	title = "Field Specs" ;		pItem_F = m_DataModel.AddHead(pHead, refname, title, true) ; }
+	//if (m_Fldspecs.Count())			{ refname = "fldspec" ;	title = "Field Specs" ;		pItem_F = m_DataModel.AddHead(pHead, refname, title, true) ; }
 	if (m_ADP.CountDataEnum())		{ refname = "enum" ;	title = "Enums" ;			pItem_E = m_DataModel.AddHead(pHead, refname, title, true) ; }
 	if (m_ADP.CountDataClass())		{ refname = "class" ;	title = "Classes" ;			pItem_C = m_DataModel.AddHead(pHead, refname, title, true) ; }
 	if (m_ADP.CountObjRepos())		{ refname = "repos" ;	title = "Repositories" ;	pItem_R = m_DataModel.AddHead(pHead, refname, title, true) ; }
 
 	//	Field Specs
-	threadLog("%s %d field specs\n", *_fn, m_Fldspecs.Count()) ;
+	//	threadLog("%s %d field specs\n", *_fn, m_Fldspecs.Count()) ;
+	//	for (n = 0 ; n < m_Fldspecs.Count() ; n++)
+	//	{
+	//	}
 
 	//	Enums
 	threadLog("%s %d enums\n", *_fn, m_ADP.CountDataEnum()) ;
@@ -414,8 +417,8 @@ hzEcode	_masterMainMenu	(hzHttpEvent* pE)
 
 	hzChain			C ;			//	Page output
 	hdsApp*			pApp ;		//	Application
-	hdsArticle*		pRoot ;		//	Tree item
-	hdsArticle*		pItem_E ;	//	Tree item "Enums"
+	//hdsArticle*		pRoot ;		//	Tree item
+	//hdsArticle*		pItem_E ;	//	Tree item "Enums"
 	hzString		refname ;	//	Reference name of tree item
 	hzString		title ;		//	Title of tree item
 
@@ -1336,7 +1339,7 @@ hzEcode	_masterClassEdit	(hzChain& C, hdsArticleCIF* pArtCIF, hzHttpEvent* pE)
 	hzString			title ;			//	Name of class
 	uint32_t			mbrNo ;			//	Member number
 	uint32_t			numId ;			//	Numeric id
-	uint32_t			n ;				//	Loop iterator
+	//uint32_t			n ;				//	Loop iterator
 
 	pInfo = (hdsInfo*) pE->Session() ;
 	if (!pInfo)
@@ -1431,6 +1434,8 @@ hzEcode	_masterMbrEdit	(hzChain& C, hdsArticleCIF* pArtCIF, hzHttpEvent* pE)
 
 hzEcode	_masterReposEdit	(hzChain& C, hdsArticleCIF* pArtCIF, hzHttpEvent* pE)
 {
+	//	MUST DO THIS!
+
 	_hzfunc(__func__) ;
 
 	//	Set the article title
@@ -1438,7 +1443,7 @@ hzEcode	_masterReposEdit	(hzChain& C, hdsArticleCIF* pArtCIF, hzHttpEvent* pE)
 
 	//	Set the article content
 
-	const hdbObjRepos*	pRepos = 0 ;	//	Repository
+	//const hdbObjRepos*	pRepos = 0 ;	//	Repository
 }
 
 void	hdsApp::MasterArticle	(hzHttpEvent* pE)

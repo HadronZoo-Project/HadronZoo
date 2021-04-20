@@ -34,6 +34,7 @@
 #include <pthread.h>
 
 #include "hzChars.h"
+#include "hzMimetype.h"
 #include "hzTextproc.h"
 #include "hzDirectory.h"
 #include "hzHttpServer.h"
@@ -1606,7 +1607,7 @@ void	hzIpServer::ServeEpollST	(void)
 	pthread_attr_setdetachstate(&tattr, PTHREAD_CREATE_DETACHED) ;
 
 	//	Set list default
-	Listen.SetDefaultObj((hzTcpListen*)0) ;
+	//Listen.SetDefaultObj((hzTcpListen*)0) ;
 
 	//	Init connected client regime
 	for (nSlot = 0 ; nSlot < 1024 ; nSlot++)
@@ -2505,8 +2506,8 @@ void	hzIpServer::ServeEpollMT	(void)
 	hzEcode			err ;					//	Returns by called functions
 	char			ipbuf[44] ;				//	Client IP address textform buffer
 
-	ls.SetDefaultObj(0) ;
-	allCC.SetDefaultObj(0) ;
+	//ls.SetDefaultObj(0) ;
+	//allCC.SetDefaultObj(0) ;
 
 	//	Pre-define thread attributes
 	pthread_attr_init(&tattr) ;

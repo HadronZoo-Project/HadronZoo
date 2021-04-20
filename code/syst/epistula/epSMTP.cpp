@@ -38,7 +38,7 @@ using namespace std ;
 #include <signal.h>
 #include <pthread.h>
 
-#include "hzCtmpls.h"
+//#include "hzCtmpls.h"
 #include "hzCodec.h"
 #include "hzTextproc.h"
 #include "hzDirectory.h"
@@ -883,6 +883,7 @@ hzEcode	_smtpPOP3Commit	(hzIpConnex* pCC)
 
 			pAcc = theEP->m_Accounts[accname] ;
 
+			/* TEMP DISABLE
 			pAcc->m_CorresDomains.Insert(tmpDom) ;
 			pAcc->m_Correspondents.Insert(tmpDom, tmpFro) ;
 
@@ -896,6 +897,7 @@ hzEcode	_smtpPOP3Commit	(hzIpConnex* pCC)
 				if (pFolder->m_Name)
 					pAcc->m_FoldersByNAME.Insert(pFolder->m_Name, pFolder) ;
 			}
+			*/
 
 			//	Initialize the database object for the message repository
 			pAcc->m_LockPOP3.Lock() ;
@@ -1256,12 +1258,14 @@ hzTcpCode	ProcAlienSMTP		(hzChain& Input, hzIpConnex* pCC)
 		//	Incomming messages must have an ID
 		if (!pInfo->theMsg.m_Id)
 		{
+			/*
 			R.Printf("554 5.7.1 Message rejected: No message id\r\n") ;
 			pInfo->m_eState = SMTP_EXPECT_QUIT ;
 			pInfo->m_bAccError = true ;
 			pCC->m_Track.Printf("No Mail id so rejected\n") ;
 
 			pCC->SendData(R) ; Input.Clear() ; return TCP_KEEPALIVE ;
+			*/
 		}
 
 		//	Update the alien domain list

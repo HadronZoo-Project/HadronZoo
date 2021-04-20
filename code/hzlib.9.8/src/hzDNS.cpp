@@ -26,7 +26,6 @@
 #include <resolv.h>
 #include <string.h>
 
-#include "hzCtmpls.h"
 #include "hzChars.h"
 #include "hzString.h"
 #include "hzErrcode.h"

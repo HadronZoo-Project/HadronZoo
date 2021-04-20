@@ -1721,9 +1721,9 @@ int		main	(int argc, char ** argv)
 	}
 
 	//	Init the dictionary
-	hzFsTbl::StartStrings() ;
-	hzFsTbl::StartDomains() ;
-	hzFsTbl::StartEmaddrs() ;
+	hzStrRepos::StartStrings() ;
+	hzStrRepos::StartDomains() ;
+	hzStrRepos::StartEmaddrs() ;
 	if (!_hzGlobal_StringTable)
 		{ slog.Out("Could not create string table\n") ; return 106 ; }
 

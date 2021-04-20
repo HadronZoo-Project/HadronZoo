@@ -410,7 +410,7 @@ void	SplitChain  (hzVect<hzString>& ar, hzChain& input, char cDelim)
 	}
 }
 
-void	SplitStrOnChar  (hzVect<hzString>& ar, hzString& input, char cDelim)
+void	SplitStrOnChar  (hzArray<hzString>& ar, hzString& input, char cDelim)
 {
 	//	Category:	Text Processing
 	//
@@ -502,7 +502,7 @@ hzEcode SplitCstrOnChar  (hzVect<hzString>& ar, const char* input, char cDelim)
 	return E_OK ;
 }
 
-hzEcode SplitCstrOnCstr  (hzVect<hzString>& ar, const char* input, const char* delim)
+hzEcode SplitCstrOnCstr  (hzArray<hzString>& ar, const char* input, const char* delim)
 {
 	//	Category:	Text Processing
 	//
@@ -568,7 +568,7 @@ hzEcode SplitCstrOnCstr  (hzVect<hzString>& ar, const char* input, const char* d
 	return E_OK ;
 }
 
-hzEcode SplitCSV  (hzVect<hzString>& ar, const char* line, char cDelim)
+hzEcode SplitCSV  (hzArray<hzString>& ar, const char* line, char cDelim)
 {
 	//	Category:	Text Processing
 	//

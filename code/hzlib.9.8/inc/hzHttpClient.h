@@ -26,7 +26,9 @@
 #define hzHttpClient_h
 
 #include "hzTcpClient.h"
-#include "hzCtmpls.h"
+#include "hzTmplList.h"
+#include "hzTmplVect.h"
+#include "hzTmplSet.h"
 #include "hzHttpProto.h"
 #include "hzDocument.h"
 
@@ -102,7 +104,7 @@ class	hzHttpClient
 	hzEcode	_procHttpResponse	(hzMapS<hzString,hzCookie>& cookies, HttpRC& hRet, const hzUrl& url) ;
 
 	hzEcode	_getpage	(hzMapS<hzString,hzCookie>& cookies, HttpRC& hRet, const hzUrl& url, const hzString& etag) ;
-	hzEcode	_postform	(HttpRC& hRet, const hzUrl& url, hzMapS<hzString,hzCookie>& cookies, const hzVect<hzString>& headers, const hzChain& formData) ;
+	hzEcode	_postform	(HttpRC& hRet, const hzUrl& url, hzMapS<hzString,hzCookie>& cookies, hzVect<hzString>& headers, const hzChain& formData) ;
 
 public:
 	hzChain		m_Error ;				//	Error logging
@@ -154,8 +156,8 @@ public:
 
 	hzEcode	TestPage	(hzChain& Z, const hzUrl& url) ;
 	hzEcode	GetPage		(HttpRC& hRet, const hzUrl& url, hzMapS<hzString,hzCookie>& cookies, const hzString& etag) ;
-	hzEcode	PostForm	(HttpRC& hRet, const hzUrl& url, hzMapS<hzString,hzCookie>& cookies, const hzVect<hzString>& hdrs, const hzList<hzPair>& data) ;
-	hzEcode	PostAjax	(HttpRC& hRet, const hzUrl& url, hzMapS<hzString,hzCookie>& cookies, const hzVect<hzString>& hdrs, const hzList<hzPair>& data) ;
+	hzEcode	PostForm	(HttpRC& hRet, const hzUrl& url, hzMapS<hzString,hzCookie>& cookies, hzVect<hzString>& hdrs, const hzList<hzPair>& data) ;
+	hzEcode	PostAjax	(HttpRC& hRet, const hzUrl& url, hzMapS<hzString,hzCookie>& cookies, hzVect<hzString>& hdrs, const hzList<hzPair>& data) ;
 } ;
 
 //
@@ -354,12 +356,6 @@ public:
 		m_resLast = 0 ;
 		m_Opflags = 0 ;
 		m_Sofar = 0 ;
-
-		m_mapHist.SetDefaultObj((hzDocMeta*)0) ;
-		m_vecHist.SetDefault((hzDocMeta*)0) ;
-		m_Forms.SetDefaultObj((hzHtmForm*)0) ;
-		m_Nodelists.SetDefaultObj((_nodeList*)0) ;
-		m_Pagelists.SetDefaultObj((_pageList*)0) ;
 	}
 
 	~hzWebhost	(void)

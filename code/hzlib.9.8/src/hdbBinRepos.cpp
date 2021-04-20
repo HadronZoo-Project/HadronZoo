@@ -19,6 +19,8 @@
 #include <fstream>
 #include <cstdio>
 
+using namespace std ;
+
 #include <unistd.h>
 #include <stdlib.h>
 #include <fcntl.h>
@@ -26,20 +28,9 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-#include "hzBasedefs.h"
-#include "hzString.h"
-#include "hzChars.h"
 #include "hzChain.h"
-#include "hzDate.h"
-#include "hzTextproc.h"
-#include "hzCtmpls.h"
-#include "hzCodec.h"
-#include "hzDocument.h"
 #include "hzDirectory.h"
 #include "hzDatabase.h"
-#include "hzProcess.h"
-
-using namespace std ;
 
 /*
 **	Variables

@@ -20,7 +20,6 @@
 #include <stdarg.h>
 
 #include "hzChars.h"
-#include "hzCtmpls.h"
 #include "hzProcess.h"
 #include "hzTextproc.h"
 #include "hzDissemino.h"

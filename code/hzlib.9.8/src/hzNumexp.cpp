@@ -21,7 +21,6 @@
 
 #include <fstream>
 
-#include "hzCtmpls.h"
 #include "hzTextproc.h"
 #include "hzProcess.h"
 

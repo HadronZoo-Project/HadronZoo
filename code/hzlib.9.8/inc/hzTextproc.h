@@ -22,15 +22,11 @@
 #ifndef hzTextproc_h
 #define hzTextproc_h
 
-#include "hzBasedefs.h"
-#include "hzString.h"
 #include "hzChain.h"
 #include "hzEmaddr.h"
 #include "hzUrl.h"
 #include "hzDate.h"
-#include "hzErrcode.h"
-#include "hzDatabase.h"
-#include "hzCtmpls.h"
+#include "hzTmplArray.h"
 
 //	Math macros
 #define minval(a,b)		(a < b ? a : b)
@@ -98,12 +94,12 @@ uint32_t	TestAlphanum	(hzString& word, hzChain::Iter& ci) ;
 **	General Prototypes
 */
 
-hzEcode		SplitCSV		(hzVect<hzString>& ar, const char* csvline, char cDelim = 0) ;
+hzEcode		SplitCSV		(hzArray<hzString>& ar, const char* csvline, char cDelim = 0) ;
 hzEcode		SplitCSV		(char** ar, char* csvline, uint32_t arSize, char cDelim = 0) ;
-void		SplitChain		(hzVect<hzString>& ar, hzChain& input, char cDelim = 0) ;
-void		SplitStrOnChar	(hzVect<hzString>& ar, hzString& input, char cDelim = 0) ;
-hzEcode		SplitCstrOnChar	(hzVect<hzString>& ar, const char* csvline, char cDelim = 0) ;
-hzEcode		SplitCstrOnCstr	(hzVect<hzString>& ar, const char* csvline, const char* delimstr) ;
+void		SplitChain		(hzArray<hzString>& ar, hzChain& input, char cDelim = 0) ;
+void		SplitStrOnChar	(hzArray<hzString>& ar, hzString& input, char cDelim = 0) ;
+hzEcode		SplitCstrOnChar	(hzArray<hzString>& ar, const char* csvline, char cDelim = 0) ;
+hzEcode		SplitCstrOnCstr	(hzArray<hzString>& ar, const char* csvline, const char* delimstr) ;
 
 uint32_t	CstrIncidence	(const char* cpStr, char c) ;
 uint32_t	CstrCopy		(char* cpDest, const char* cpSource, uint32_t nMaxlen = 0) ;

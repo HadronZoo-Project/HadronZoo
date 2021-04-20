@@ -32,7 +32,6 @@
 #include "hzChain.h"
 #include "hzDate.h"
 #include "hzTextproc.h"
-#include "hzCtmpls.h"
 #include "hzCodec.h"
 #include "hzDocument.h"
 #include "hzDirectory.h"

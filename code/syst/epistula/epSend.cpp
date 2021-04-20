@@ -50,7 +50,7 @@ using namespace std ;
 #include <signal.h>
 #include <pthread.h>
 
-#include "hzCtmpls.h"
+//#include "hzCtmpls.h"
 #include "hzCodec.h"
 #include "hzTextproc.h"
 #include "hzDirectory.h"

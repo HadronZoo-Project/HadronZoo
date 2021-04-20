@@ -19,6 +19,7 @@
 #define hzUnixacc_h
 
 #include "hzString.h"
+#include "hzTmplMapS.h"
 
 class	hzUserinfo
 {

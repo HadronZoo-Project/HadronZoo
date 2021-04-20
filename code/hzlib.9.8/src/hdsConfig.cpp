@@ -1183,7 +1183,7 @@ hzEcode	hdsApp::_readDataEnum	(hzXmlNode* pN)
 
 	_hzfunc("hdsApp::_readDataEnum") ;
 
-	hzVect<hzString>	ar ;		//	Vect of items found so far
+	hzArray<hzString>	ar ;		//	Vect of items found so far
 	hzSet<hzString>		items ;		//	Set of items found so far to ensure no repeats
 
 	hzAttrset		ai ;			//	Attribute iterator
@@ -1872,7 +1872,7 @@ hzEcode	hdsApp::_readMember	(hdbClass* pClass, hzXmlNode* pN)
 	const hdbDatatype*	pType = 0 ;			//	Data type
 	const hdbClass*		pComposite = 0 ;	//	Variable class (if applicable)
 	const hdbMember*	pMbr ;				//	Class member
-	const hdbObjRepos*	pRepos = 0 ;		//	Predefined repository (if applicable)
+	//const hdbObjRepos*	pRepos = 0 ;		//	Predefined repository (if applicable)
 
 	hdsFldspec		fs ;					//	Field specification that will be applied to member (will copy params from any supplied)
 	hzAttrset		ai ;					//	Attribute iterator
@@ -3152,8 +3152,8 @@ hzEcode	hdsApp::_readExec	(hzXmlNode* pN, hzList<hdsExec*>& execList, hdsPage* p
 	uint32_t			cmd ;			//	Command instruction
 	uint32_t			bErr = 0 ;		//	Error condition
 	uint32_t			nParams = 0 ;	//	Error condition
-	int32_t				val_Lo ;		//	First index into ADP m_mapSubs
-	int32_t				val_Hi ;		//	Last index into ADP m_mapSubs
+	//int32_t				val_Lo ;		//	First index into ADP m_mapSubs
+	//int32_t				val_Hi ;		//	Last index into ADP m_mapSubs
 	hdbBasetype			peType ;		//	Percent entity type
 	hdbBasetype			peType_b ;		//	Percent entity type (second value)
 	hzEcode				rc = E_OK ;		//	Return code
@@ -5248,11 +5248,11 @@ hzEcode	hdsApp::_readPageBody	(hdsPage* pPage, hzXmlNode* pN)
 	_tagArg			tga ;			//	Tag argument for _readTag()
 	hzAttrset		ai ;			//	Attribute iterator
 	hzXmlNode*		pN1 ;			//	Subtag probe
-	hzXmlNode*		pN2 ;			//	Subtag probe
-	hzXmlNode*		pN3 ;			//	Subtag probe
+	//hzXmlNode*		pN2 ;			//	Subtag probe
+	//hzXmlNode*		pN3 ;			//	Subtag probe
 	hdsVE*			pVE ;			//	Set if a HTML entity is found
 	hzString		color ;			//	Background color
-	uint32_t		x ;				//	Tag iterator (for bodytext garnering)
+	//uint32_t		x ;				//	Tag iterator (for bodytext garnering)
 	hzEcode			rc = E_OK ;		//	Return code
 	//hzRecep32		r32 ;			//	For USL text value
 
@@ -5596,7 +5596,7 @@ hzEcode	hdsApp::LoadPassives	(void)
 	hzList<hzPair>::Iter	lp ;	//	Passives iterator
 
 	hzVect	<hzString>	dirs ;		//	Needed for ListDir call
-	hzVect	<hzString>	files ;		//	Passive files matching the criteria
+	hzArray	<hzString>	files ;		//	Passive files matching the criteria
 
 	ifstream	is ;				//	For reading in file
 	const char*	i ;					//	Filename with/without leading slash
@@ -5849,7 +5849,7 @@ hzEcode	hdsApp::_loadInclFile	(const hzString& dir, const hzString& fname)
 		{ m_pLog->Out("%s. Filepath %s does not exist\n", *_fn, *fpath) ; return E_NODATA ; }
 
 	de.InitStat(m_Configdir, fname, fs) ;
-	de.m_Parity.CalcMD5File(fpath) ;
+	//de.m_Parity.CalcMD5File(fpath) ;
 	m_Configs.Insert(fname, de) ;
 
 	rc = X.Load(fpath) ;

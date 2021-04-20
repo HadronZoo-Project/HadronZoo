@@ -26,7 +26,7 @@
 
 #include "hzChars.h"
 #include "hzTextproc.h"
-#include "hzCtmpls.h"
+#include "hzMimetype.h"
 #include "hzTcpClient.h"
 #include "hzIpServer.h"
 #include "hzCodec.h"
@@ -1495,7 +1495,6 @@ hzEcode	hzEmail::SendEpistula	(hzChain& report)
 	hzString	S ;					//	Working string
 	hzEmaddr	ema ;				//	Email address
 	char		cvId[12] ;			//	Mail-id
-	hzEcode		rc = E_OK ;			//	Return code
 
 	//	Create mail-id
 	sprintf(cvId, "%04x.%04x", getpid(), ++nSeq) ;

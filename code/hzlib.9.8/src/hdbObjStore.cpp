@@ -36,12 +36,10 @@
 #include "hzChain.h"
 #include "hzDate.h"
 #include "hzTextproc.h"
-#include "hzCtmpls.h"
 #include "hzCodec.h"
 #include "hzDocument.h"
 #include "hzDirectory.h"
 #include "hzDatabase.h"
-//#include "hzFsTbl.h"
 #include "hzDelta.h"
 #include "hzProcess.h"
 
@@ -162,7 +160,7 @@ hzEcode	hdbObjStore::InitStart	(const hdbClass* pObjClass, const hzString& repos
 
 	_hzfunc("hdbObjStore::InitStart") ;
 
-	const hdbMember*	pMem ;	//	Member pointer (from initializing hdbClass)
+	//const hdbMember*	pMem ;	//	Member pointer (from initializing hdbClass)
 
 	uint32_t	nIndex ;		//	Member iterator
 	hzEcode		rc ;			//	Return code
@@ -206,7 +204,7 @@ hzEcode	hdbObjStore::InitStart	(const hdbClass* pObjClass, const hzString& repos
 	{
 		m_Indexes[nIndex] = 0 ;
 
-		pMem = m_pClass->GetMember(nIndex) ;
+		//pMem = m_pClass->GetMember(nIndex) ;
 	}
 
 	m_eReposInit = HDB_REPOS_INIT_PROG ;
@@ -566,7 +564,7 @@ hzEcode	hdbObjStore::Insert		(uint32_t& objId, const hdbObject& obj)
 	uint32_t		mbrNo ;			//	Member number
 	uint32_t		secId = 0 ;		//	Secondary object id
 	hzEcode			rc = E_OK ;		//	Return code
-	hzRecep32		r32 ;			//	Time/date buffer
+	//hzRecep32		r32 ;			//	Time/date buffer
 
 	//	Check Init state
 	_hdb_ck_initstate(_fn, Name(), m_eReposInit, HDB_REPOS_OPEN) ;

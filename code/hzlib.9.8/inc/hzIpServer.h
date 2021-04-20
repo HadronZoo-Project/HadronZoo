@@ -72,7 +72,9 @@
 #include <sys/socket.h>
 #include <openssl/ssl.h>
 
-#include "hzCtmpls.h"
+#include "hzTmplList.h"
+#include "hzTmplVect.h"
+#include "hzTmplMapS.h"
 #include "hzChain.h"
 #include "hzIpaddr.h"
 
@@ -610,7 +612,7 @@ hzEcode		InitServerSSL	(const char* pvtKey, const char* sslCert, const char* ssl
 **	Globals
 */
 
-//extern	hzMapS	<hzIpaddr,hzIpinfo>	_hzGlobal_StatusIP ;	//	Black and white listed IP addresses
+extern	hzMapS	<hzIpaddr,hzIpinfo>	_hzGlobal_StatusIP ;	//	Black and white listed IP addresses
 
 extern	hzString	_hzGlobal_Hostname ;		//	String form of actual hostname of this server
 extern	hzString	_hzGlobal_HostIP ;			//	String form of assigned IP address of this server

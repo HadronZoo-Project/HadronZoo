@@ -23,6 +23,8 @@
 #include "hzChars.h"
 #include "hzTextproc.h"
 #include "hzChain.h"
+#include "hzIpaddr.h"
+#include "hzEmaddr.h"
 #include "hzProcess.h"
 
 using namespace std ;

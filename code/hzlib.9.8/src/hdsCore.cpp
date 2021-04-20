@@ -947,7 +947,7 @@ uint32_t	hdsApp::_calcAccessFlgs	(hzString& a)
 
 	_hzfunc("hdsApp::_calcAccessFlgs") ;
 
-	hzVect<hzString>	types ;		//	User types in specification
+	hzArray<hzString>	types ;		//	User types in specification
 
 	//hdsUsertype	ut ;			//	User types
 	hzString	S ;				//	Working string

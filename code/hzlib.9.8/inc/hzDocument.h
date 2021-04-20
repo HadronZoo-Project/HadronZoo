@@ -23,10 +23,15 @@
 #define hzDocument_h
 
 #include "hzErrcode.h"
-#include "hzCtmpls.h"
+#include "hzTmplArray.h"
+#include "hzTmplList.h"
+#include "hzTmplVect.h"
+#include "hzTmplSet.h"
+#include "hzTmplMapS.h"
+#include "hzTmplMapM.h"
 #include "hzEmaddr.h"
 #include "hzUrl.h"
-#include "hzFsTbl.h"
+#include "hzStrRepos.h"
 #include "hzProcess.h"
 
 #define HDOC_ONLOAD_LINKS	0x01	//	Upon loading of HTML document, populate the m_setLinks and m_vecLinks with links found in page
@@ -376,7 +381,7 @@ class	hzDocument
 	//	tools could find themselves dowloading both but all were considered documents.
 
 protected:
-	hzFsTbl		m_Dict ;	//	All strings
+	hzStrRepos	m_Dict ;	//	All strings
 	hzDocMeta	m_Info ;	//	Metadata
 	hzChain		m_Error ;	//	Error reporting
 
@@ -409,7 +414,7 @@ class	hzHtmElem
 	//	hzHtmlElem is the internal manifestation of a HTML tag appearing in a HTML document.
 	//
 	//	Note the use of 32-bit string numbers instead of pointers for the parent, first child and next sibling. It is for the resolution of these by means of a
-	//	hzFsTbl, that each HTML tag contains a pointer back to the host document which holds the dictionary.
+	//	hzStrRepos, that each HTML tag contains a pointer back to the host document which holds the dictionary.
 
 protected:
 	hzDocHtml*	m_pHostDoc ;		//	Host document

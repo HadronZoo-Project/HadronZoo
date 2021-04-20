@@ -29,6 +29,7 @@
 
 #include "hzErrcode.h"
 #include "hzChars.h"
+#include "hzMimetype.h"
 #include "hzTextproc.h"
 #include "hzCodec.h"
 #include "hzDirectory.h"

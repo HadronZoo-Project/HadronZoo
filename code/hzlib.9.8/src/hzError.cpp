@@ -27,7 +27,6 @@
 #include <errno.h>
 #include <execinfo.h>
 
-#include "hzCtmpls.h"
 #include "hzChars.h"
 #include "hzErrcode.h"
 #include "hzProcess.h"

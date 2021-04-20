@@ -20,7 +20,6 @@
 #include <sys/stat.h>
 
 #include "hzChars.h"
-#include "hzCtmpls.h"
 #include "hzProcess.h"
 #include "hzTextproc.h"
 #include "hzDirectory.h"

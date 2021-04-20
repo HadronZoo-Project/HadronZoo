@@ -38,7 +38,6 @@ using namespace std ;
 #include <signal.h>
 #include <pthread.h>
 
-#include "hzCtmpls.h"
 #include "hzCodec.h"
 #include "hzTextproc.h"
 #include "hzDirectory.h"
@@ -147,9 +146,9 @@ hzEcode	Epistula::InitEpistulaClasses	(void)
 	hzEcode			rc = E_OK ;		//	Return code
 
 	//	Init the string table
-	hzFsTbl::StartStrings(m_EpisStrings) ;
-	hzFsTbl::StartDomains(m_EpisDomains) ;
-	hzFsTbl::StartEmaddrs(m_EpisEmaddrs) ;
+	hzStrRepos::StartStrings(m_EpisStrings) ;
+	hzStrRepos::StartDomains(m_EpisDomains) ;
+	hzStrRepos::StartEmaddrs(m_EpisEmaddrs) ;
 
 	if (!_hzGlobal_StringTable)	{ slog.Out("Could not create global string table\n") ; return E_MEMORY ; }
 	if (!_hzGlobal_FST_Domain)	{ slog.Out("Could not create global domain table\n") ; return E_MEMORY ; }

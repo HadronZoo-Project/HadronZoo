@@ -24,6 +24,8 @@
 #include <stdarg.h>
 
 #include "hzString.h"
+//#include "hzIpaddr.h"
+//#include "hzEmaddr.h"
 
 class	hzEmaddr ;
 class	hzIpaddr ;

@@ -286,7 +286,7 @@ hzEmaddr&	hzEmaddr::operator=	(const hzString& S)
 	return operator=(*S) ;
 }
 
-hzEmaddr&	hzEmaddr::operator=	(hzChain::Iter& ci)
+hzEmaddr&	hzEmaddr::operator=	(const hzChain::Iter& ci)
 {
 	//	Determines if the supplied iterator is at the start of a valid email address and if it is, assignes this as the value to the calling instance.
 	//

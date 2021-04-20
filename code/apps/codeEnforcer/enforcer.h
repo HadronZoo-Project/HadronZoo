@@ -130,7 +130,6 @@
 
 #include "hzBasedefs.h"
 #include "hzChars.h"
-#include "hzCtmpls.h"
 #include "hzDocument.h"
 #include "hzDissemino.h"
 #include "hzDatabase.h"
@@ -358,6 +357,7 @@ public:
 	uint16_t	t_excl ;		//	Excluded (comment or be excluded by compiler directive)
 	uint16_t	t_cmtf ;		//	Comment format (comments only)
 	CppLex		type ;			//	Token type or subtype
+	uint8_t		resv[6] ;
 
 	ceToken	(void)
 	{
@@ -694,7 +694,7 @@ class	ceEntbl
 public:
 	ceEntbl	(void)
 	{
-		m_ents.SetDefaultObj((ceEntity*)0) ;
+		//m_ents.SetDefaultObj((ceEntity*)0) ;
 		applied = 0 ;
 		m_parent = 0 ;
 	}
@@ -1784,7 +1784,7 @@ public:
 
 	ceProject	(void)
 	{
-		m_Using.SetDefault((ceNamsp*)0) ;
+		//m_Using.SetDefault((ceNamsp*)0) ;
 		m_pCurrNamsp = 0 ;
 	}
 

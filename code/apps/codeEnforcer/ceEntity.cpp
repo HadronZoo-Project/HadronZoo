@@ -29,7 +29,6 @@
 #include "hzBasedefs.h"
 #include "hzChars.h"
 #include "hzTextproc.h"
-#include "hzCtmpls.h"
 #include "hzDirectory.h"
 #include "hzDocument.h"
 #include "hzProcess.h"
@@ -771,13 +770,13 @@ hzEcode	ceEntbl::AddEntity	(ceFile* pFile, ceEntity* pE, const char* caller)
 
 	if (pReal)
 	{
-		g_EC[_hzlevel()].Printf(" - - real -- \n") ;
+		//g_EC[_hzlevel()].Printf(" - - real -- \n") ;
 		g_EC[_hzlevel()].Printf("%s (%s) Ent-table %s accepts %s %s type %s (id %u)\n",
 			*_fn, caller, *applied->StrName(), pE->EntDesc(), *pE->StrName(), *pReal->Typlex().Str(), pE->GetUEID()) ;
 	}
 	else
 	{
-		g_EC[_hzlevel()].Printf(" - - not real -- \n") ;
+		//g_EC[_hzlevel()].Printf(" - - not real -- \n") ;
 		g_EC[_hzlevel()].Printf("%s (%s) Ent-table %s accepts %s %s (id %u)\n", *_fn, caller, *applied->StrName(), pE->EntDesc(), *pE->StrName(), pE->GetUEID()) ;
 	}
 
@@ -1250,7 +1249,7 @@ ceEntity*	ceFile::LookupString	(ceKlass* pHost, const hzString& entname, const c
 
 	_hzfunc("ceFile::LookupString") ;
 
-	hzVect<hzString>	s_ar ;	//	Array of strings from spliting by ::
+	hzArray<hzString>	s_ar ;	//	Array of strings from spliting by ::
 	hzVect<ceToken>		t_ar ;	//	Split string (by ::)
 
 	ceToken		tok ;			//	For conversion to tokens

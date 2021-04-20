@@ -26,7 +26,6 @@
 #include <netdb.h>
 #include <sys/socket.h>
 
-#include "hzCtmpls.h"
 #include "hzProcess.h"
 #include "hzUdpClient.h"
 

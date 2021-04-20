@@ -18,7 +18,6 @@
 #ifndef hzProcess_h
 #define hzProcess_h
 
-#include "hzCtmpls.h"
 #include "hzDate.h"
 #include "hzLock.h"
 
@@ -278,7 +277,7 @@ public:
 #define _hzfunc(x)	static hzFuncname _fn ; _fn = x ; _hz_func_reg _thisfn ; _thisfn = *_fn
 #define	_hzlevel()	_thisfn._phz->Level()
 
-//	Specific to hzCtmpls
+//	Specific to Collection Class Templates
 #define _hzfunc_ct(x)	static hzFuncname _fn ; _fn = x ; _hz_func_reg _thisfn ; if (_hzGlobal_Debug & HZ_DEBUG_CTMPLS) _thisfn = *_fn ;
 
 /*

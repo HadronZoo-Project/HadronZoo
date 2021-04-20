@@ -22,9 +22,13 @@
 #ifndef hzMailer_h
 #define hzMailer_h
 
-#include "hzCtmpls.h"
+#include "hzMimetype.h"
 #include "hzIpaddr.h"
 #include "hzEmaddr.h"
+#include "hzTmplList.h"
+#include "hzTmplVect.h"
+#include "hzTmplSet.h"
+#include "hzTmplMapS.h"
 
 enum	SMTPCode
 {

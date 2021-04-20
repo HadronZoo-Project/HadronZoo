@@ -36,11 +36,9 @@
 #include "hzChain.h"
 #include "hzDate.h"
 #include "hzTextproc.h"
-#include "hzCtmpls.h"
 #include "hzCodec.h"
 #include "hzDocument.h"
 #include "hzDirectory.h"
-//#include "hzFsTbl.h"
 #include "hzDatabase.h"
 #include "hzDelta.h"
 #include "hzProcess.h"
@@ -164,7 +162,7 @@ hdbClass::hdbClass  (hdbADP& adp, hdbClsDgn designation)
 {   
 	m_pADP = &adp ;
 	m_arrMembers.SetDefault((hdbMember*)0) ;
-	m_mapMembers.SetDefaultObj((hdbMember*)0) ;
+	//m_mapMembers.SetDefaultObj((hdbMember*)0) ;
 	m_eClassInit = HDB_CLASS_INIT_NONE ;
 	m_eDesignation = designation ;
 	m_nMinSpace = 0 ; 
@@ -215,6 +213,8 @@ void	hdbClass::_clear	(void)
 	//
 	//	Arguments:	None
 	//	Returns:	None
+
+	_hzfunc("hdbClass::_clear") ;
 
 	hdbMember*	pMbr ;	//	Member pointer
 	uint32_t	x ;		//	Member iterator
@@ -414,6 +414,8 @@ bool	hdbClass::operator==	(const hdbClass& op) const
 	//	Test for equality between hdbClass instances (this row has same columns and column settings as the operand)
 	//
 	//	Arguments:	1)	op	The operand data class
+
+	_hzfunc("hdbClass::operator==") ;
 
 	const hdbMember*	pMA ;		//	Member pointer for this class
 	const hdbMember*	pMB ;		//	Member pointer for other class
@@ -648,6 +650,8 @@ void	hdbObjRepos::DescRepos	(hzChain& Z, uint32_t nIndent) const
 	//				2)	nIndent	The number of leading tabs to apply to each line
 	//
 	//	Returns:	None
+
+	_hzfunc("hdbObjRepos::DescRepos") ;
 }
 
 hzEcode	hdbADP::Export	(void)
@@ -656,7 +660,7 @@ hzEcode	hdbADP::Export	(void)
 	//
 	//	The current ADP for any application using the HadronZoo Database Suite (HDB), will be in a file 'appname.adp' in the /etc/hzDelta.d directory.
 
-	_hzfunc(__func__) ;
+	_hzfunc("hdbADP::Export") ;
 
 	hzMapS	<uint32_t,const hdbClass*>	classesById ;	//	For ordering classes by ID
 
@@ -822,9 +826,9 @@ hzEcode	hdbADP::Import	(const hzString& appName)
 	//
 	//	The current ADP for any application using the HadronZoo Database Suite (HDB), will be in a file 'appname.adp' in the /etc/hzDelta.d directory.
 
-	_hzfunc(__func__) ;
+	_hzfunc("hdbADP::Import") ;
 
-	hzVect	<hzString>	ar ;		//	Enum values
+	hzArray	<hzString>	ar ;		//	Enum values
 
 	ifstream		is ;			//	Input stream for previous ADP if applicable
 	hzDocXml		docADP ;		//	XML document
@@ -1406,6 +1410,8 @@ void	hdbADP::Report	(hzChain& Z)
 	//
 	//	Returns:	None
 
+	_hzfunc("hdbADP::Report") ;
+
 	const hdbDatatype*	pDT ;		//	Data type
 	const hdbClass*		pClass ;	//	Data class
 	const hdbMember*	pMbr ;		//	Data class member
@@ -1588,6 +1594,8 @@ hzEcode	hdbADP::RegisterDataEnum	(const hdbEnum* pEnum)
 
 hzEcode	hdbADP::RegisterRegexType	(const hdbRgxtype* pRgx)
 {
+	_hzfunc("hdbADP::RegisterRegexType") ;
+
 	if (!pRgx)
 		return E_ARGUMENT ;
 	if (!pRgx->StrTypename())
@@ -1598,6 +1606,8 @@ hzEcode	hdbADP::RegisterRegexType	(const hdbRgxtype* pRgx)
 
 hzEcode	hdbADP::RegisterObjRepos	(hdbObjRepos* pRepos)
 {
+	_hzfunc("hdbADP::RegisterObjRepos") ;
+
 	if (!pRepos)
 		return E_ARGUMENT ;
 	if (!pRepos->Name())
@@ -1630,6 +1640,8 @@ hzEcode	hdbADP::RegisterDataStore	(hdbBinStore* pRepos)
 
 hzEcode	hdbADP::RegisterBinRepos	(hdbBinRepos* pRepos)
 {
+	_hzfunc("hdbADP::RegisterBinRepos") ;
+
 	if (!pRepos)
 		return E_ARGUMENT ;
 	if (!pRepos->Name())
@@ -1647,6 +1659,8 @@ bool	hdbADP::IsSubClass	(const hdbClass* pMain, const hdbClass* pSub)
 	//
 	//	Returns:	True	If the test class is a sub-class of the main class
 	//				False	Otherwise
+
+	_hzfunc("hdbADP::IsSubClass") ;
 
 	uint32_t	val_Lo ;		//	First item
 	uint32_t	val_Hi ;		//	Last item

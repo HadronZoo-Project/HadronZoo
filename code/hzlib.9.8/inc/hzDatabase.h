@@ -25,12 +25,15 @@
 #include "hzBasedefs.h"
 #include "hzDate.h"
 #include "hzChain.h"
-#include "hzCtmpls.h"
 #include "hzIpaddr.h"
 #include "hzEmaddr.h"
 #include "hzUrl.h"
 #include "hzMimetype.h"
 #include "hzDocument.h"
+#include "hzTmplArray.h"
+#include "hzTmplVect.h"
+#include "hzTmplMapS.h"
+#include "hzTmplMapM.h"
 #include "hzProcess.h"
 
 /*
@@ -350,7 +353,7 @@ class	hdbEnum : public hdbDatatype
 	//	the global string table. The items numbers are simply the positions of the items in the array. The hdbEnum class is important in Dissemino applications
 	//	where datum of an enumerated data type are manifest as HTML selectors, sets of radio buttons or sets of checkboxes.
 	//
-	//	The string numbers in the global string table (see the hzFsTbl class) are RUIDs (run-time unique identifiers). This is perfectly good for RAM based
+	//	The string numbers in the global string table (see the hzStrRepos class) are RUIDs (run-time unique identifiers). This is perfectly good for RAM based
 	//	data repositories (caches) as these are loaded on startup from their delta files which always contain the full string values. In effect, the delta files
 	//	are the authorative record precisely because they are on disk and don't use RUIDs.
 	//

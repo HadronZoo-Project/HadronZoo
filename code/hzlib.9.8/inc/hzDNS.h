@@ -23,7 +23,7 @@
 #define hzDNS_h
 
 #include "hzChain.h"
-#include "hzCtmpls.h"
+#include "hzTmplList.h"
 #include "hzIpaddr.h"
 
 enum	DnsType

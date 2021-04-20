@@ -29,7 +29,6 @@
 #include <dirent.h>
 #include <sys/stat.h>
 
-#include "hzCtmpls.h"
 #include "hzDocument.h"
 #include "hzDatabase.h"
 #include "hzDirectory.h"

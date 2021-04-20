@@ -32,6 +32,7 @@
 #include "hzErrcode.h"
 #include "hzUnixacc.h"
 #include "hzDirectory.h"
+#include "hzTmplList.h"
 #include "hzProcess.h"
 
 using namespace	std ;
@@ -154,9 +155,7 @@ hzString	hzDirent::Pathname	(void) const
 
 hzDirent&	hzDirent::operator=	(const hzDirent& op)
 {
-	//parent = op.parent ;
 	m_parent = op.m_parent ;
-	m_Parity = op.m_Parity ;
 	m_Name = op.m_Name ;
 	m_Ctime = op.m_Ctime ;
 	m_Mtime = op.m_Mtime ;
@@ -545,6 +544,7 @@ hzEcode	ReadDir	(hzVect<hzDirent>& entries, const char* cpPath, const char* cpCr
 
 		filename = pDE->d_name ;
 		meta.InitStat(thePath, filename, fs) ;
+		//threadLog("%s: Adding %s\n", *_fn, *teststr) ;
 		entries.Add(meta) ;
 	}
 
@@ -863,11 +863,11 @@ hzEcode		Filemove	(const hzString& src, const hzString& tgt)
 **	Section 2: File listings
 **
 **	Provides the application functions of:-
-**	1)	hzEcode	FindfilesStd	(hzVect<hzString>& files, const char* criteria) ;
-**	2)	hzEcode	FindfilesTar	(hzVect<hzString>& files, const char* criteria) ;
+**	1)	hzEcode	FindfilesStd	(hzArray<hzString>& files, const char* criteria) ;
+**	2)	hzEcode	FindfilesTar	(hzArray<hzString>& files, const char* criteria) ;
 */
 
-static	hzEcode	_scanfiles_r	(hzVect<hzString>& files, hzVect<hzString>& parts, const hzString& pathsofar, uint32_t nLevel, bool bLimit)
+static	hzEcode	_scanfiles_r	(hzArray<hzString>& files, hzArray<hzString>& parts, const hzString& pathsofar, uint32_t nLevel, bool bLimit)
 {
 	//	Category:	Directory
 	//
@@ -1036,7 +1036,7 @@ static	hzEcode	_scanfiles_r	(hzVect<hzString>& files, hzVect<hzString>& parts, c
 	return E_OK ;
 }
 
-static	hzEcode	_scanfiles	(hzVect<hzString>& files, const char* criteria, bool bLimit)
+static	hzEcode	_scanfiles	(hzArray<hzString>& files, const char* criteria, bool bLimit)
 {
 	//	Category:	Directory
 	//
@@ -1069,7 +1069,7 @@ static	hzEcode	_scanfiles	(hzVect<hzString>& files, const char* criteria, bool b
 	//	the root and matching all the previous parts. But if false the files found will include the above but if the last part also
 	//	matches to directories these will be examined as well. False is the default so beware!
 
-	hzVect<hzString>	parts ;			//	Parts of full path
+	hzArray<hzString>	parts ;		//	Parts of full path
 
 	hzChain			rootVal ;		//	For building the path so far
 	const char*		i ;				//	Pathname iterator
@@ -1126,7 +1126,7 @@ static	hzEcode	_scanfiles	(hzVect<hzString>& files, const char* criteria, bool b
 	return _scanfiles_r(files, parts, rootDir, 0, bLimit) ;
 }
 
-hzEcode	FindfilesStd	(hzVect<hzString>& files, const char* criteria)
+hzEcode	FindfilesStd	(hzArray<hzString>& files, const char* criteria)
 {
 	//	Category:	Directory
 	//
@@ -1143,7 +1143,7 @@ hzEcode	FindfilesStd	(hzVect<hzString>& files, const char* criteria)
 	return _scanfiles(files, criteria, true) ;
 }
 
-hzEcode	FindfilesTar	(hzVect<hzString>& files, const char* criteria)
+hzEcode	FindfilesTar	(hzArray<hzString>& files, const char* criteria)
 {
 	//	Category:	Directory
 	//

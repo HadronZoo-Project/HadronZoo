@@ -170,6 +170,8 @@ hzEcode	hzLockRW::LockWrite	(int32_t nTries)
 	//				E_TIMEOUT	The thread holding write access has held the lock for too long
 	//				E_OK		Write access granted
 
+	_hzfunc("hzLockRW::LockWrite") ;
+
 	uint32_t	cont ;		//	Contention or spin count
 	uint32_t	tries ;		//	Contention or spin count
 	uint32_t	tid ;		//	Thread id
@@ -182,7 +184,7 @@ hzEcode	hzLockRW::LockWrite	(int32_t nTries)
 	limit = nTries < 0 ? 0xfffffffe : nTries * 1000 ;
 
 	if (m_lockval == tid)
-		Fatal("hzLock::hzLock. Attempt by thread %u to re-lock address %p\n", tid, &m_lockval) ;
+		Fatal("%s: Attempt by thread %u to re-lock address %p\n", *_fn, tid, &m_lockval) ;
 
 	//	Wait for lock to become free (no other threads with write access)
 	for (tries = cont = 0 ;;)
@@ -221,6 +223,8 @@ hzEcode	hzLockRW::LockRead	(int32_t timeout)
 	//				E_TIMEOUT	The thread holding write access has held the lock for too long
 	//				E_OK		Write access granted
 
+	_hzfunc("hzLockRW::LockRead") ;
+
 	uint32_t	cont ;		//	Contention or spin count
 	uint32_t	tid ;		//	Caller thread id
 
@@ -233,7 +237,7 @@ hzEcode	hzLockRW::LockRead	(int32_t timeout)
 		return E_NOTFOUND ;
 
 	if (m_lockval == tid)
-		Fatal("hzLock::hzLock. Attempt by thread %u to re-lock address %p\n", tid, &m_lockval) ;
+		Fatal("%s: Attempt by thread %u to re-lock address %p\n", *_fn, tid, &m_lockval) ;
 
 	//	Spin until the lock is free (m_lockval == 0)
 	for (cont = 0 ; m_lockval ; cont++)
@@ -517,6 +521,7 @@ hzEcode	hzLockRWD::LockRead	(int32_t nTries)
 	//				E_TIMEOUT	The thread holding write access has held the lock for too long
 	//				E_OK		Write access granted
 
+	_hzfunc("hzLockRWD::LockRead") ;
 
 	uint32_t	cont ;		//	Contention or spin count
 	uint32_t	tid ;		//	Thread id
@@ -530,7 +535,7 @@ hzEcode	hzLockRWD::LockRead	(int32_t nTries)
 		return E_NOTFOUND ;
 
 	if (m_lockval == tid)
-		Fatal("hzLock::hzLock. Attempt by thread %u to re-lock address %p\n", tid, &m_lockval) ;
+		Fatal("%s: Attempt by thread %u to re-lock address %p\n", *_fn, tid, &m_lockval) ;
 
 	for (cont = 0 ; m_lockval ; cont++)
 	{

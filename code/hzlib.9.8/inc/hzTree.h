@@ -22,10 +22,9 @@
 
 #include "hzChars.h"
 #include "hzChain.h"
-#include "hzCtmpls.h"
 #include "hzCodec.h"
 #include "hzDate.h"
-#include "hzFsTbl.h"
+#include "hzStrRepos.h"
 #include "hzDirectory.h"
 #include "hzDatabase.h"
 #include "hzDocument.h"

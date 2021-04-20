@@ -42,7 +42,6 @@
 #include "hzDate.h"
 #include "hzTextproc.h"
 #include "hzTokens.h"
-#include "hzCtmpls.h"
 #include "hzCodec.h"
 #include "hzDocument.h"
 #include "hzDirectory.h"
@@ -785,7 +784,7 @@ hzEcode	hdbIndexUkey::Init	(const hdbObjRepos* pRepos, const hzString& mbrName, 
 	case BASETYPE_URL:		//	m_keys.pSt = new hzMapS<hzString,uint32_t> ;
 							//	m_keys.pSt->SetDefaultObj(0) ;
 							m_keys.pSu = new hzMapS<uint32_t,uint32_t> ;
-							m_keys.pSu->SetDefaultObj(0) ;
+							//m_keys.pSu->SetDefaultObj(0) ;
 							break ;
 
 	case BASETYPE_IPADDR:
@@ -793,7 +792,7 @@ hzEcode	hdbIndexUkey::Init	(const hdbObjRepos* pRepos, const hzString& mbrName, 
 	case BASETYPE_SDATE:
 	case BASETYPE_INT32:
 	case BASETYPE_UINT32:	m_keys.pSu = new hzMapS<uint32_t,uint32_t> ;
-							m_keys.pSu->SetDefaultObj(0) ;
+							//m_keys.pSu->SetDefaultObj(0) ;
 							break ;
 
 	case BASETYPE_DOUBLE:
@@ -801,7 +800,7 @@ hzEcode	hdbIndexUkey::Init	(const hdbObjRepos* pRepos, const hzString& mbrName, 
 	case BASETYPE_XDATE:
 	case BASETYPE_INT64:
 	case BASETYPE_UINT64:	m_keys.pLu = new hzMapS<uint64_t,uint32_t> ;
-							m_keys.pLu->SetDefaultObj(0) ;
+							//m_keys.pLu->SetDefaultObj(0) ;
 							break ;
 	default:
 		rc = E_TYPE ;

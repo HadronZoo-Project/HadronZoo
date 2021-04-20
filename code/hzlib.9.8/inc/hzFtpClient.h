@@ -23,7 +23,7 @@
 #define hzFtpClient_h
 
 #include "hzChain.h"
-#include "hzCtmpls.h"
+#include "hzTmplMapS.h"
 #include "hzDirectory.h"
 #include "hzTcpClient.h"
 
@@ -49,7 +49,7 @@ class	hzFtpClient
 	} ;
 
 	hzVect<_ftpline>	m_Stack ;			//	Server response stack
-	hzVect<hzString>	m_Array ;			//	For processing port nos etc
+	hzArray<hzString>	m_Array ;			//	For processing port nos etc
 
 	hzTcpClient m_ConnControl ;				//	TCP control client object
 

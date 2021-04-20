@@ -21,7 +21,6 @@
 #include <execinfo.h>
 
 #include "hzChars.h"
-#include "hzCtmpls.h"
 #include "hzProcess.h"
 #include "hzTextproc.h"
 #include "hzString.h"
@@ -37,7 +36,7 @@
 
 #define HZ_STRADDR_OSIZE	0x80000000		//	Top bit set indicates string is 'oversized'
 #define HZ_STRADDR_OMASK	0x7fffffff		//	Oversized address mask (remaining 31 bits)
-#define HZ_STRADDR_BLKID	0x7FFF0000		//	Mid 20 bits for block part of address
+#define HZ_STRADDR_BLKID	0x7fff0000		//	Bits 1 to 15 inclusive for block part of address
 
 #define HZ_STRING_FACTOR	5				//	Size of string space meta data plus null terminator
 #define HZ_STRING_SBSPACE	65536			//	Total size of the string space blocks in multiples of 8 bytes
@@ -115,7 +114,6 @@ public:
 
 	_strRegime	()
 	{
-		//printf("STR REGIME CONSTRUCTOR\n") ;
 		memset(m_flistSmall, 0, 32 * sizeof(uint32_t)) ;
 		memset(m_Super, 0, 4096 * sizeof(_strBloc*)) ;
 		m_flistOsize = 0 ;
@@ -164,7 +162,7 @@ void*	_strXlate	(uint32_t strAddr)
 	slotNo = strAddr & 0xffff ;
 	blkNo = (strAddr & HZ_STRADDR_BLKID) >> 16 ;
 
-	if (blkNo > s_pStrRegime->m_nBloc)
+	if (blkNo == 0 || blkNo > s_pStrRegime->m_nBloc)
 		{ threadLog("%s. CORRUPT: Cannot xlate address %u:%u. No such superblock (%u issued)\n", *_fn, blkNo, slotNo, s_pStrRegime->m_nBloc) ; return 0 ; }
 
 	pBloc = s_pStrRegime->m_Super[blkNo-1] ;
@@ -237,6 +235,9 @@ uint32_t	_strAlloc	(uint32_t nSize)
 				_hzGlobal_Memstats.m_strSm_f[nUnit-1]-- ;
 
 				strAddr = s_pStrRegime->m_flistSmall[nUnit-1] ;
+				if (!(strAddr & HZ_STRADDR_BLKID))
+					hzexit(_fn, 0, E_CORRUPT, "Case 1 Illegal String Address %u:%u", (strAddr&0x7fff0000)>>16, strAddr&0xffff) ;
+
 				pSlot = (_strFLE*) _strXlate(strAddr) ;
 				if (!pSlot)
 					hzexit(_fn, 0, E_CORRUPT, "Illegal freelist (%d) string address %u:%u", nUnit-1, (strAddr&0x7fff0000)>>16, strAddr&0xffff) ;
@@ -288,6 +289,9 @@ uint32_t	_strAlloc	(uint32_t nSize)
 		//	Assign from the superblock free space
 		pSeg = s_pStrRegime->m_pTopBlock->m_Space + s_pStrRegime->m_pTopBlock->m_Usage ;
 		strAddr = s_pStrRegime->m_pTopBlock->m_blkSelf + s_pStrRegime->m_pTopBlock->m_Usage ;
+		if (!(strAddr & HZ_STRADDR_BLKID))
+			hzexit(_fn, 0, E_CORRUPT, "Case 2 Illegal String Address %u:%u", (strAddr&0x7fff0000)>>16, strAddr&0xffff) ;
+
 		s_pStrRegime->m_pTopBlock->m_Alloc[strAddr&0xffff] = nSize-1 ;
 		s_pStrRegime->m_pTopBlock->m_Usage += nUnit ;
 		memset(pSeg, 0, nUnit * 8) ;
@@ -337,6 +341,9 @@ uint32_t	_strAlloc	(uint32_t nSize)
 		strAddr = ++s_pStrRegime->m_nOver ;
 	}
 
+	//	if (!(strAddr & HZ_STRADDR_BLKID))
+	//		hzexit(_fn, 0, E_CORRUPT, "Case 3 Illegal String Address %u:%u", (strAddr&0x7fff0000)>>16, strAddr&0xffff) ;
+
 	memset(pVoid, 0, nUnit * 8) ;
 	strAddr |= HZ_STRADDR_OSIZE ;
 
@@ -365,7 +372,6 @@ void	_strFree	(uint32_t strAddr, uint32_t nSize)
 
 	if (!pItem || !nSize)
 		{ hzerr(_fn, HZ_ERROR, E_CORRUPT, "WARNING freeing obj %p of size %d bytes\n", pItem, nSize) ; return ; }
-	//	printf("Freeing %u size %u %s\n", strAddr, size, pItem->m_data) ;
 
 	if (nSize <= 256)
 	{
@@ -1179,193 +1185,6 @@ hzString&	hzString::UrlDecode	(void)
 	m_addr = destAddr ;
 	return *this ;
 }
-
-#if 0
-hzString&	hzString::FnameEncode	(void)
-{
-	//	Converts non-URL and non-filename chars into %xx form.
-	//
-	//	Note that no assumptions can be made about the input except that it may contain chars unsuitable for filenames e.g. the forward slash and in the opinion
-	//	of HadronZoo, the space. The encoding must therefore be reversible.
-	//
-	//	This function assumes the chars a-z, A-Z, 0-9, the period and the underscore are the only valid filename chars. Any other char
-	//	will be converted to a set of chars consisting of a percent sign and two hexidecimal numbers. This means that when it comes to
-	//	decoding, such a set will be converted to a single char. This would be fine if we could assume that no input would ever have
-	//	such a sequence but alas we cannot assume this.
-	//
-	//	It is nessesary therefore to convert percent chars in the input to a %hh set even if they are blatently part of such a set
-	//	already!
-	//
-	//	Arguments:	None
-	//	Returns:	Reference to this string instance
-
-	_hzfunc("hzString::FnameEncode") ;
-
-	_strItem*		thisCtl ;		//	This string's control area
-	_strItem*		destCtl ;		//	New string's control area
-	char*		i ;				//	Pointer into old string data
-	char*		j ;				//	Pointer into new string data
-	uint32_t	destAddr ;		//	New string space address
-	uint32_t	newLen = 0 ;	//	Length of new string
-	char		buf	[4] ;		//	Fox hex-conversion
-
-	//	If NULL return
-	if (!m_addr)
-		return *this ;
-	thisCtl = (_strItem*) _strXlate(m_addr) ;
-	if (!thisCtl)
-		hzexit(_fn, 0, E_CORRUPT, "Illegal src string address %u:%u", (m_addr&0x7fff0000)>>16, m_addr&0xffff) ;
-
-	//	Is change needed? Not unless there are incidences of a percent followed by two hex chars
-	for (i = thisCtl->m_data ; *i ; i++)
-	{
-		if (*i >= 'a' && *i <= 'z')	{ newLen++ ; continue ; }
-		if (*i >= 'A' && *i <= 'Z')	{ newLen++ ; continue ; }
-		if (*i >= '0' && *i <= '9')	{ newLen++ ; continue ; }
-		if (*i == CHAR_USCORE)		{ newLen++ ; continue ; }
-		if (*i == CHAR_PERIOD)		{ newLen++ ; continue ; }
-		if (*i == CHAR_EQUAL)		{ newLen++ ; continue ; }
-
-		newLen += 3 ;
-	}
-
-	if (newLen == thisCtl->_getSize())
-		return *this ;
-
-	//	Allocate new space
-	destAddr = _strAlloc(newLen + HZ_STRING_FACTOR) ;
-	destCtl = (_strItem*) _strXlate(destAddr) ;
-	if (!destCtl)
-		hzexit(_fn, 0, E_CORRUPT, "Illegal string address") ;
-	destCtl->_setSize(newLen) ;
-	destCtl->m_copy = 1 ;
-
-	//	Create new string with all non-filename chars converted to %xx
-	j = destCtl->m_data ;
-	for (i = thisCtl->m_data ; *i ; i++)
-	{
-		if (*i >= 'a' && *i <= 'z')	{ *j++ = *i ; continue ; }
-		if (*i >= 'A' && *i <= 'Z')	{ *j++ = *i ; continue ; }
-		if (*i >= '0' && *i <= '9')	{ *j++ = *i ; continue ; }
-		if (*i == CHAR_USCORE)		{ *j++ = *i ; continue ; }
-		if (*i == CHAR_PERIOD)		{ *j++ = *i ; continue ; }
-		if (*i == CHAR_EQUAL)		{ *j++ = *i ; continue ; }
-
-		*j++ = CHAR_PERCENT ;
-		sprintf(buf, "%02x", (uint32_t) *i) ;
-		*j++ = buf[0] ;
-		*j++ = buf[1] ;
-	}
-	*j = 0 ;
-
-	//	Tidy up
-	if (thisCtl->m_copy < 100)
-	{
-		if (!_hzGlobal_MT)
-		{
-			thisCtl->m_copy-- ;
-			if (!thisCtl->m_copy)
-				_strFree(m_addr, thisCtl->_getSize() + HZ_STRING_FACTOR) ;
-		}
-		else
-		{
-			if (__sync_add_and_fetch(&(thisCtl->m_copy), -1) == 0)
-				_strFree(m_addr, thisCtl->_getSize() + HZ_STRING_FACTOR) ;
-		}
-	}
-
-	m_addr = destAddr ;
-	return *this ;
-}
-
-hzString&	hzString::FnameDecode	(void)
-{
-	//	Converts all spaces (and other non url chars) into underscores
-	//	Decodes a string previously encoded by FnameEncode. Firstly the string is tested to ensure it does not contain chars ...
-	//
-	//	Arguments:	None
-	//	Returns:	Reference to this string instance
-
-	_hzfunc("hzString::FnameDecode") ;
-
-	_strItem*		thisCtl ;		//	This string's control area
-	_strItem*		destCtl ;		//	New string's control area
-	char*		i ;				//	Pointer into old string data
-	char*		j ;				//	Pointer into new string data
-	uint32_t	destAddr ;		//	New string space address
-	uint32_t	newLen = 0 ;	//	Length of new string
-	uint32_t	val ;			//	Hex value
-
-	//	If NULL return
-	if (!m_addr)
-		return *this ;
-	thisCtl = (_strItem*) _strXlate(m_addr) ;
-	if (!thisCtl)
-		hzexit(_fn, 0, E_CORRUPT, "Illegal src string address %u:%u", (m_addr&0x7fff0000)>>16, m_addr&0xffff) ;
-
-	//	Is change needed? Not unless there are incidences of a percent followed by two hex chars
-	for (i = thisCtl->m_data ; *i ; i++)
-	{
-		if (*i == CHAR_PERCENT && IsHex(i[1]) && IsHex(i[2]))
-			i += 2 ;
-		newLen++ ;
-	}
-
-	if (newLen == thisCtl->_getSize())
-		return *this ;
-
-	//	Allocate new space
-	destAddr = _strAlloc(newLen + HZ_STRING_FACTOR) ;
-	destCtl = (_strItem*) _strXlate(destAddr) ;
-	if (!destCtl)
-		hzexit(_fn, 0, E_CORRUPT, "Illegal string address") ;
-	destCtl->_setSize(newLen) ;
-	destCtl->m_copy = 1 ;
-
-	//	Create new string with all %xx sequences converted back to chars
-	i = thisCtl->m_data ;
-	j = destCtl->m_data ;
-
-	for (; *i ;)
-	{
-		if (*i == CHAR_PERCENT && IsHex(i[1]) && IsHex(i[2]))
-		{
-			i++ ;
-			val = (*i >='0' && *i <='9' ? *i-'0' : *i >= 'A' && *i<= 'F' ? *i+10-'A' : *i >= 'a' && *i<='f' ? *i+10-'a' : 0) ;
-			val *= 16 ;
-
-			i++ ;
-			val += (*i >='0' && *i <='9' ? *i-'0' : *i >= 'A' && *i<= 'F' ? *i+10-'A' : *i >= 'a' && *i<='f' ? *i+10-'a' : 0) ;
-
-			*j++ = val ;
-			i++ ;
-			continue ;
-		}
-
-		*j++ = *i++ ;
-	}
-	*j = 0 ;
-
-	//	Tidy up
-	if (thisCtl->m_copy < 100)
-	{
-		if (!_hzGlobal_MT)
-		{
-			thisCtl->m_copy-- ;
-			if (!thisCtl->m_copy)
-				_strFree(m_addr, thisCtl->_getSize() + HZ_STRING_FACTOR) ;
-		}
-		else
-		{
-			if (__sync_add_and_fetch(&(thisCtl->m_copy), -1) == 0)
-				_strFree(m_addr, thisCtl->_getSize() + HZ_STRING_FACTOR) ;
-		}
-	}
-
-	m_addr = destAddr ;
-	return *this ;
-}
-#endif
 
 hzString&	hzString::Reverse	(void)
 {

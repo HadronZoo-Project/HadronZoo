@@ -27,8 +27,10 @@
 #ifndef hzHttpServer_h
 #define hzHttpServer_h
 
+#include "hzMimetype.h"
 #include "hzChain.h"
-#include "hzCtmpls.h"
+#include "hzTmplArray.h"
+#include "hzTmplMapS.h"
 #include "hzIpServer.h"
 #include "hzHttpProto.h"
 

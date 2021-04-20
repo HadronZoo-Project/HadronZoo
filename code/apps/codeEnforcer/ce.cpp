@@ -31,7 +31,8 @@
 #include "hzBasedefs.h"
 #include "hzChars.h"
 #include "hzTextproc.h"
-#include "hzCtmpls.h"
+#include "hzTmplQue.h"
+#include "hzTmplStack.h"
 #include "hzDirectory.h"
 #include "hzDocument.h"
 //#include "hzDictionary.h"
@@ -589,7 +590,11 @@ hzEcode	ceProject::Init	(hzString cfgfile)
 	slog.Out("%s. Loding Configs\n", *_fn) ;
 	rc = X.Load(cfgfile) ;
 	if (rc != E_OK)
-		{ slog.Out("%s. ERROR Could not load project file %s\n", *_fn, *cfgfile) ; return rc ; }
+	{
+		slog.Out("%s. ERROR Could not load project file %s. Err=%s\n", *_fn, *cfgfile, Err2Txt(rc)) ;
+		slog.Out(X.Error()) ;
+		return rc ;
+	}
 
 	pRoot = X.GetRoot() ;
 	if (!pRoot)
@@ -919,6 +924,10 @@ int32_t	main	(int32_t argc, char ** argv)
 		return -1 ;
 	}
 
+	//	Open logs
+	slog.OpenFile(*projname, LOGROTATE_NEVER) ;
+	slog.Verbose(true) ;
+
 	//	Check args and $HADRONZOO
 	rc = HadronZooInitEnv() ;
 	if (rc != E_OK)
@@ -930,13 +939,10 @@ int32_t	main	(int32_t argc, char ** argv)
 		return -2 ;
 	}
 
-	//	Open logs
-	slog.OpenFile(*projname, LOGROTATE_NEVER) ;
-	slog.Verbose(true) ;
 	slog.Out("HADRONZOO = %s\n", *_hzGlobal_HADRONZOO) ;
 
 	//	Set up string table
-	hzFsTbl::StartStrings("words.dat") ;
+	hzStrRepos::StartStrings("words.dat") ;
 
 	//	Init for standard C++ types and the std namespace
 	rc = PreLoadTypes() ;

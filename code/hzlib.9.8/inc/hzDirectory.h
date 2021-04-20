@@ -27,7 +27,10 @@
 #include "hzDate.h"
 #include "hzChain.h"
 #include "hzCodec.h"
-#include "hzCtmpls.h"
+#include "hzTmplArray.h"
+#include "hzTmplVect.h"
+#include "hzTmplMapS.h"
+#include "hzTmplMapM.h"
 
 /*
 **	Definitions
@@ -53,9 +56,9 @@ class	hzDirent
 	//
 	//	Directory entry. Either file or directory
 
-	uint64_t	m_Size ;		//	Size in bytes (assuming 64 bit OS)
 	hzString	m_parent ;		//	The parent directory
 	hzString	m_Name ;		//	This will be full path if this is a dir, only the name if a file
+	uint64_t	m_Size ;		//	Size in bytes (assuming 64 bit OS)
 	uint32_t	m_Ctime ;		//	Date & time when file created
 	uint32_t	m_Mtime ;		//	Date & time of last modification
 	uint32_t	m_Inode ;		//	Inode value
@@ -66,9 +69,6 @@ class	hzDirent
 	uint16_t	m_Status ;		//	Appliction assigned value (eg version)
 
 public:
-	//hzList<hzDirent*>	m_Kinder ;	//	Subdirectories or files
-
-	hzMD5	m_Parity ;		//	Paritiy value (files only, set by app rather then read dir funcs)
 
 	hzDirent	(void)
 	{
@@ -179,8 +179,8 @@ public:
 
 	hzFileset	(void)
 	{
-		m_dirs.SetDefaultObj((hzDirent*)0) ;
-		m_file.SetDefaultObj((hzDirent*)0) ;
+		//m_dirs.SetDefaultObj((hzDirent*)0) ;
+		//m_file.SetDefaultObj((hzDirent*)0) ;
 		_clear() ;
 	}
 
@@ -221,10 +221,10 @@ hzEcode	Dircopy			(const hzString& tgt, const hzString& src, bool bRecurse) ;
 hzEcode	Filemove		(const hzString& tgt, const hzString& src) ;
 
 //	FindfilesStd (find files strictly conforming to the supplied criteria)
-hzEcode	FindfilesStd	(hzVect<hzString>& files, const char* criteria) ;
+hzEcode	FindfilesStd	(hzArray<hzString>& files, const char* criteria) ;
 
 //	FindfilesTar (find files according to the tar interpretation of the supplied criteria)
-hzEcode	FindfilesTar	(hzVect<hzString>& files, const char* criteria) ;
+hzEcode	FindfilesTar	(hzArray<hzString>& files, const char* criteria) ;
 
 hzEcode AssertDir		(const char* cpDir, uint32_t nPerms) ;
 hzEcode	DirExists		(const char* dirname) ;

@@ -25,8 +25,6 @@
 #include <malloc.h>
 
 #include "hzBasedefs.h"
-#include "hzCtmpls.h"
-//#include "hzFsTbl.h"
 #include "hzDatabase.h"
 #include "hzDate.h"
 #include "hzDocument.h"
@@ -563,6 +561,8 @@ static	void	_report_mem_itemA	(hzChain& Z, const char* title, uint32_t curr, uin
 	Z.Printf("<td>%s</td><td>%s</td><td>%s</td></tr>\n", _sn(b1,curr), _sn(b2,prev), _sn(b3,sum)) ;
 }
 
+/*
+NEED TO USE THIS AGAIN
 static	void	_report_mem_itemB	(hzChain& Z, const char* title, uint32_t A, uint32_t B, uint32_t C, uint32_t D, uint32_t sum)
 {
 	//	Reports 5 values
@@ -581,6 +581,7 @@ static	void	_report_mem_itemB	(hzChain& Z, const char* title, uint32_t A, uint32
 
 	Z.Printf("</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>\n", _sn(b1, A), _sn(b2, B), _sn(b3, C), _sn(b4, D), _sn(b5,sum)) ;
 }
+*/
 
 static	void	_report_mem_itemC	(hzChain& Z, const char* title, uint32_t A, uint32_t B, uint32_t C, uint32_t D, uint32_t curr, uint32_t prev, uint32_t sum)
 {

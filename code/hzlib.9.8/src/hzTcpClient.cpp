@@ -32,7 +32,6 @@
 #include <openssl/ssl.h>
 #include <openssl/err.h>
 
-#include "hzCtmpls.h"
 #include "hzProcess.h"
 #include "hzTcpClient.h"
 

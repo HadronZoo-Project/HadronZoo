@@ -2082,7 +2082,7 @@ void	hdsArtref::Generate	(hzChain& C, hzHttpEvent* pE, uint32_t& nLine)
 	hzList<hdsVE*>::Iter	ih ;	//	Html entity iterator
 
 	hdsInfo*		pInfo = 0 ;		//	Session
-	hdsLang*		pLang ;			//	Applicable language
+	//hdsLang*		pLang ;			//	Applicable language
 	hdsTree*		pAG = 0 ;		//	Article group
 	hdsArticle*		pArt = 0 ;		//	The article
 	hdsArticleStd*	pArtStd = 0 ;	//	The article as a visible entity container

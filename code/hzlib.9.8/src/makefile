@@ -66,11 +66,13 @@ HADRONZOO_SRC =	hdbBinRepos.cpp		\
 				hzDocXml.cpp		\
 				hzEmaddr.cpp		\
 				hzError.cpp			\
-				hzFsTbl.cpp			\
 				hzFtpClient.cpp		\
 				hzHttpClient.cpp	\
 				hzHttpServer.cpp	\
 				hzIpaddr.cpp		\
+				hzIdxCh.cpp			\
+				hzIsam.cpp			\
+				hzIsamT.cpp			\
 				hzIpServer.cpp		\
 				hzLock.cpp			\
 				hzLogger.cpp		\
@@ -81,6 +83,7 @@ HADRONZOO_SRC =	hdbBinRepos.cpp		\
 				hzProcess.cpp		\
 				hzRegex.cpp			\
 				hzString.cpp		\
+				hzStrRepos.cpp		\
 				hzTcpClient.cpp		\
 				hzTextproc.cpp		\
 				hzTokens.cpp		\
@@ -122,11 +125,13 @@ HADRONZOO_OBJ =	$(OBJ)/hdbBinRepos.o	\
 				$(OBJ)/hzDNS.o			\
 				$(OBJ)/hzEmaddr.o		\
 				$(OBJ)/hzError.o		\
-				$(OBJ)/hzFsTbl.o		\
 				$(OBJ)/hzFtpClient.o	\
 				$(OBJ)/hzHttpClient.o	\
 				$(OBJ)/hzHttpServer.o	\
 				$(OBJ)/hzIpaddr.o		\
+				$(OBJ)/hzIdxCh.o		\
+				$(OBJ)/hzIsam.o			\
+				$(OBJ)/hzIsamT.o		\
 				$(OBJ)/hzIpServer.o		\
 				$(OBJ)/hzLock.o			\
 				$(OBJ)/hzLogger.o		\
@@ -137,6 +142,7 @@ HADRONZOO_OBJ =	$(OBJ)/hdbBinRepos.o	\
 				$(OBJ)/hzProcess.o		\
 				$(OBJ)/hzRegex.o		\
 				$(OBJ)/hzString.o		\
+				$(OBJ)/hzStrRepos.o		\
 				$(OBJ)/hzTcpClient.o	\
 				$(OBJ)/hzTextproc.o		\
 				$(OBJ)/hzTokens.o		\
@@ -260,9 +266,6 @@ $(OBJ)/hzEmaddr.o:			$(SRC)/hzEmaddr.cpp
 $(OBJ)/hzError.o:			$(SRC)/hzError.cpp
 	$(CCMD) -o $@ $(CFLAGS) $(SRC)/hzError.cpp
 
-$(OBJ)/hzFsTbl.o:			$(SRC)/hzFsTbl.cpp
-	$(CCMD) -o $@ $(CFLAGS) $(SRC)/hzFsTbl.cpp
-
 $(OBJ)/hzFtpClient.o:		$(SRC)/hzFtpClient.cpp
 	$(CCMD) -o $@ $(CFLAGS) $(SRC)/hzFtpClient.cpp
 
@@ -274,6 +277,15 @@ $(OBJ)/hzHttpServer.o:		$(SRC)/hzHttpServer.cpp
 
 $(OBJ)/hzIpaddr.o:			$(SRC)/hzIpaddr.cpp
 	$(CCMD) -o $@ $(CFLAGS) $(SRC)/hzIpaddr.cpp
+
+$(OBJ)/hzIdxCh.o:			$(SRC)/hzIdxCh.cpp
+	$(CCMD) -o $@ $(CFLAGS) $(SRC)/hzIdxCh.cpp
+
+$(OBJ)/hzIsam.o:			$(SRC)/hzIsam.cpp
+	$(CCMD) -o $@ $(CFLAGS) $(SRC)/hzIsam.cpp
+
+$(OBJ)/hzIsamT.o:			$(SRC)/hzIsamT.cpp
+	$(CCMD) -o $@ $(CFLAGS) $(SRC)/hzIsamT.cpp
 
 $(OBJ)/hzIpServer.o:		$(SRC)/hzIpServer.cpp
 	$(CCMD) -o $@ $(CFLAGS) $(SRC)/hzIpServer.cpp
@@ -304,6 +316,9 @@ $(OBJ)/hzRegex.o:			$(SRC)/hzRegex.cpp
 
 $(OBJ)/hzString.o:			$(SRC)/hzString.cpp
 	$(CCMD) -o $@ $(CFLAGS) $(SRC)/hzString.cpp
+
+$(OBJ)/hzStrRepos.o:		$(SRC)/hzStrRepos.cpp
+	$(CCMD) -o $@ $(CFLAGS) $(SRC)/hzStrRepos.cpp
 
 $(OBJ)/hzTcpClient.o:		$(SRC)/hzTcpClient.cpp
 	$(CCMD) -o $@ $(CFLAGS) $(SRC)/hzTcpClient.cpp

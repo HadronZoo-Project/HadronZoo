@@ -267,7 +267,7 @@ hzDomain&	hzDomain::operator=	(const hzString& S)
 	return operator=(*S) ;
 }
 
-hzDomain&	hzDomain::operator=	(hzChain::Iter& ci)
+hzDomain&	hzDomain::operator=	(const hzChain::Iter& ci)
 {
 	//	Determines if the supplied iterator is at the start of a valid domain name and if it is, assignes this as the value to the calling instance.
 	//
